@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SWFLauncher;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -6,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace SWFLauncher
+namespace VisualComponents
 {
     // https://stackoverflow.com/questions/4463363/how-can-i-set-the-opacity-or-transparency-of-a-panel-in-winforms
 
@@ -15,6 +16,7 @@ namespace SWFLauncher
         #region Private Fields
 
         private bool m_MouseIsDown = false;
+        private bool m_MouseClick = false;
         private Point m_MouseDownCoordinates;
 
         #endregion
@@ -22,7 +24,8 @@ namespace SWFLauncher
 
         #region Public Events
 
-        public event EventHandler<MovingPanelEventArgs> Moving;
+        public event EventHandler<MovingPanelEventArgs> Move;
+        public event EventHandler<MouseEventArgs> MouseClick;
 
         #endregion
 
@@ -47,6 +50,12 @@ namespace SWFLauncher
         protected override void OnMouseDown(MouseEventArgs e)
         {
             m_MouseIsDown = true;
+
+            if (e.Button != MouseButtons.Right)
+            {
+                m_MouseClick = true;
+            }
+
             m_MouseDownCoordinates = e.Location;
 
             base.OnMouseDown(e);
@@ -59,9 +68,12 @@ namespace SWFLauncher
             base.OnMouseUp(e);
         }
 
+        //
         protected override void OnMouseMove(MouseEventArgs e)
         {
             base.OnMouseMove(e);
+
+            m_MouseClick = false;
 
             if (m_MouseIsDown)
             {
@@ -74,7 +86,25 @@ namespace SWFLauncher
             Point LocationNew = new Point(this.Location.X + e.Location.X - m_MouseDownCoordinates.X,
                 this.Location.Y + e.Location.Y - m_MouseDownCoordinates.Y);
 
-            Moving?.Invoke(this, new MovingPanelEventArgs(LocationNew.X, LocationNew.Y));
+            Move?.Invoke(this, new MovingPanelEventArgs(LocationNew.X, LocationNew.Y));
+        }
+
+        //
+        protected override void OnMouseClick(MouseEventArgs e)
+        {
+            base.OnMouseClick(e);
+
+            if (!m_MouseClick)
+            {
+                return;
+            }
+
+            OnClicking();
+        }
+
+        private void OnClicking()
+        {
+            MouseClick?.Invoke(this, new MouseEventArgs(MouseButtons.None, 0, 0, 0, 0));
         }
 
         #endregion

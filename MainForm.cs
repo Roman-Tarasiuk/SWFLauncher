@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using VisualComponents;
 
 namespace SWFLauncher
 {
@@ -33,7 +34,7 @@ namespace SWFLauncher
             this.panel1.Name = "panel1";
             this.panel1.Size = m_PanelSize;
 
-            panel1.Moving += Panel1_Moving;
+            panel1.Move += Panel1_Moving;
 
             this.panel1.ContextMenuStrip = contextMenuStrip1;
 
