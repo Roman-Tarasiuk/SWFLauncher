@@ -69,5 +69,32 @@ namespace SWFLauncher
         {
             panel1.SendToBack();
         }
+
+        private void sizeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var resizing = new ResizingForm();
+            resizing.Width = this.Width;
+            resizing.Height = this.Height;
+
+            DialogResult resutlt = resizing.ShowDialog();
+
+            if (resutlt == DialogResult.OK)
+            {
+                if (resizing.Width > 0)
+                {
+                    this.Width = resizing.Width;
+                }
+
+                if (resizing.Height > 0)
+                {
+                    this.Height = resizing.Height;
+                }
+            }
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
