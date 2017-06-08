@@ -66,6 +66,16 @@ namespace SWFLauncher
             topmostToolStripMenuItem.Checked = this.TopMost;
         }
 
+        private void showInTaskbarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Backing up current size – it is changing somehow.
+            Size size = this.Size;
+
+            this.ShowInTaskbar = !this.ShowInTaskbar;
+            this.Size = size;
+            showInTaskbarToolStripMenuItem.Checked = this.ShowInTaskbar;
+        }
+
         private void readyToolStripMenuItem_Click(object sender, EventArgs e)
         {
             panel1.SendToBack();
