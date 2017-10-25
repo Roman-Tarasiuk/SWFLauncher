@@ -51,6 +51,7 @@
             this.webBrowser1.Location = new System.Drawing.Point(0, 0);
             this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser1.Name = "webBrowser1";
+            this.webBrowser1.ScriptErrorsSuppressed = true;
             this.webBrowser1.Size = new System.Drawing.Size(332, 235);
             this.webBrowser1.TabIndex = 1;
             // 
@@ -65,7 +66,7 @@
             this.toolStripSeparator1,
             this.exitToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(158, 164);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(158, 142);
             // 
             // openToolStripMenuItem1
             // 
